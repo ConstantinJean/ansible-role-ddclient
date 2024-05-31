@@ -1,7 +1,9 @@
 ---
 # ddclient/defaults/main.yml
 
-ddclient_apt_install:
+ddclient_install_from_git: true
+
+ddclient_apt_install_dependencies:
   - "libio-socket-ssl-perl"
   - "perl"
   - "libdata-validate-ip-perl"

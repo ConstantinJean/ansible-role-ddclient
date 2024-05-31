@@ -2,7 +2,7 @@
 
 - name: Install apt Dependencies
   apt:
-    name: "{{ ddclient_apt_install }}"
+    name: "{{ ddclient_apt_install_dependencies }}"
     state: present
     update_cache: yes
     cache_valid_time: 86400

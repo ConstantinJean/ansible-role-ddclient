@@ -1,0 +1,9 @@
+---
+
+- name: Install ddclient
+  community.general.pacman:
+    name:
+      - ddclient
+     update_cache: true
+     state: present
+  when: ansible_facts['os_family'] == 'Archlinux'

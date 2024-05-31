@@ -1,30 +1,20 @@
 ---
 # ddclient/tasks/main.yml
 
-- name: Create ~/git Directory
-  file:
-    path: "{{ ansible_user_dir }}/git"
-    state: directory
-    owner: "{{ ansible_real_user_id }}"
-    group: "{{ ansible_real_group_id }}"
+- name: Include OS-specific variables.
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_facts['os_family'] + '-' + ansible_facts['distribution_major_version'] }}.yml"
+    - "{{ ansible_facts['os_family'] }}.yml"
 
-- name: Make Sure git is Installed
-  apt:
-    name: git
-    state: present
-    update_cache: yes
-    cache_valid_time: 86400
-  become: true
+- import_tasks: prepare_git.yml
+  when: ddclient_install_from_git
 
-- name: Clone DDClient's Git Repo
-  git:
-    repo: "{{ ddclient_git_repo_http }}"
-    dest: "{{ ddclient_git_repo_dest }}"
-    update: yes
-    accept_hostkey: yes
-  register: _ddclient_git_cloned
+- import_tasks: install_from_git.yml
+  when: ddclient_install_from_git
 
-- import_tasks: install.yml
+- import_tasks: install_from_git.yml
+  when: not ddclient_install_from_git
 
 - name: Build Out ddclient.conf File
   template:
