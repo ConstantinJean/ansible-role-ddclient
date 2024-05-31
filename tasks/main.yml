@@ -13,7 +13,7 @@
 - import_tasks: install_from_git.yml
   when: ddclient_install_from_git
 
-- import_tasks: install_from_git.yml
+- import_tasks: install_from_package.yml
   when: not ddclient_install_from_git
 
 - name: Build Out ddclient.conf File
