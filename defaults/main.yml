@@ -18,17 +18,20 @@ ddclient_file:
   directory: /etc/ddclient
   file: ddclient.conf
 
-ddclient_conf:
-  - name: default
-    pid: ~/pid.pid
-  - name: "Blank"
-    protocol: value
-    use: value
-    server: value
-    ssl: value
-    login: value
-    password: value
-    address: value
+ddclient_main_conf:
+  daemon: 300
+  syslog: yes
+  ssl: yes
+  mail: root
+  mail-failed: root
+  pid: ~/pid.pid
+  use: web
+
+ddclient_ddns_conf:
+  protocol: cloudflare
+  password: value
+  zone: zone.tld
+  domains: domain.tld, my.domain.tld
 
 ddclient_exec: /usr/sbin/ddclient
 ddclient_pid:
