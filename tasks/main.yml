@@ -7,7 +7,7 @@
     - "{{ ansible_facts['os_family'] + '-' + ansible_facts['distribution_major_version'] }}.yml"
     - "{{ ansible_facts['os_family'] }}.yml"
 
-- import_tasks: prepare_git.yml
+- import_tasks: git_prepare.yml
   when: ddclient_install_from_git
 
 - import_tasks: install_from_git.yml
