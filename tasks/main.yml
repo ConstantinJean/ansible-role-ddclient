@@ -24,7 +24,7 @@
     group: root
     mode: "0700"
   become: true
-  #notify: Restart DDClient
+  notify: Restart DDClient
 
 - name: Update Mode for New Files
   file:
